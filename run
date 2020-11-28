@@ -1,0 +1,4 @@
+#!/bin/bash
+
+python force.py
+zathura Images/graph.pdf
