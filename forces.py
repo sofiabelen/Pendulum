@@ -19,8 +19,8 @@ def f(t, omega):
 
 sns.set(context='notebook', palette='colorblind')
 fig, ax = plt.subplots(figsize=(9, 9))
-ax.set_xlabel(r'$x$')
-ax.set_ylabel(r'$f(x)$')
+ax.set_xlabel(r'$t$')
+ax.set_ylabel(r'$f(t)$')
 ax.set_title("Forces")
 
 time = np.arange(0, 100.0, 0.01)
