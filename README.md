@@ -20,8 +20,9 @@ So we will solve for A_f(ω)
 ![Alt text](img/graph_1.svg)
 
 2. f(t) = f₀ cos(ωt), if cos(ωt) > 0, else 0
-![Alt text](img/forces.svg)
 ![Alt text](img/graph_2.svg)
 
 3. f(t) = f₀ (1 / π + 1 / 2 cos(ωt) + 2 / (3π) cos(2ωt) - 2 / (15π) cos(4ωt))
 ![Alt text](img/graph_3.svg)
+
+![Alt text](img/forces.svg)
