@@ -11,7 +11,7 @@ v0 = 1.0
 f0 = 5.0
 sq_omega0 = omega0**2
 omega_min = 0.1
-omega_max = 1.0
+omega_max = 2.0
 dt = 0.01
 
 ## Force function
@@ -49,7 +49,7 @@ def solver(omega, gamma, steps_sim):
         phin = phi
         vn = v
 
-        if(i >= 0.6 * float(steps_sim)):
+        if(i >= 0.5 * float(steps_sim)):
             Afmax = max(Afmax, np.abs(phi))
 
     return Afmax
@@ -59,7 +59,7 @@ def run(gamma):
     omegas = np.zeros(steps_omega)
     j_char = 0
 
-    total_run_time = 3.0 / gamma
+    total_run_time = 8.0 / gamma
     steps_sim = int(total_run_time / dt)
     print(steps_sim)
 
@@ -77,17 +77,19 @@ def run(gamma):
     def line(x, a, b):
         return a*x + b
     
-    j1 = int(steps_omega / 5.0)
+    if(gamma == 0.01):
+        j1 = int(steps_omega / 5.0)
 
-    popt, pcov = curve_fit(f=line, xdata=omegas[:j1], ydata=Afmax[:j1])
-    x = np.array([0, omegas[j1]])
-    y = line(x, *popt)
-    ax.annotate(r'$A_f \to$ 0', (1.7, 0))
+        popt, pcov = curve_fit(f=line, xdata=omegas[:j1], ydata=Afmax[:j1])
+        x = np.array([0, omegas[j1]])
+        y = line(x, *popt)
+        ax.annotate(r'$A_f \to$ 0', (1.7, 0))
+        ax.annotate(r'$A_f \to$ %.3f' % line(0, *popt), (0.13, 10.0))
 
     ## Plotting
-    ax.scatter(omegas, Afmax, label=r'$\gamma=$ %.2f' % gamma, s=0.7)
+    ax.scatter(omegas, Afmax, label=r'$\gamma=$ %.2f' % gamma, s=0.8)
     ax.set_title(r'$A_f(\omega)$')
-
+    
     ## Maximum
     ax.axvline(omegas[j_char], alpha=0.5, color='black')
     ax.axhline(Afmax[j_char], alpha=0.5, color='black')
@@ -104,4 +106,5 @@ run(0.1)
 run(0.3)
 
 ax.legend()
+fig.savefig("img/graph_1.svg")
 fig.savefig("img/graph_1.pdf")
