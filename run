@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python force.py
-zathura Images/graph.pdf
+time python solver.py
+zathura img/graph_1.pdf
